@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Invoice Generator</title>
+ <style>
+ body {
+ font-family: Arial, sans-serif;
+ }
+ .invoice {
+ max-width: 800px;
+ margin: 0 auto;
+ padding: 20px;
+ background-color: #F4F4F4;
+ border: 1px solid #ddd;
+ }
+ .invoice h1 {
+ text-align: center;
+ }
+ .invoice input[type="text"],
+ .invoice textarea {
+ width: 80%;
+ padding: 10px;
+ margin-bottom: 10px;
+ }
+ .invoice table {
+ width: 100%;
+ border-collapse: collapse;
+ margin-bottom: 10px;
+ }
+ .invoice th, .invoice td {
+ padding: 8px;
+ text-align: left;
+ border-bottom: 1px solid #ddd;
+ }
+ .invoice tfoot td {
+ text-align: right;
+ }
+ .invoice .add-item-btn,
+ .invoice .remove-item-btn {
+ display: inline-block;
+ background-color: #4CAF50;
+ color: #fff;
+ border: none;
+ padding: 10px;
+ margin-top: 10px;
+ cursor: pointer;
+ }
+ .currency-flag {
+ margin-right: 5px;
+ }
+ /* Adjust the width of quantity and unit price inputs */
+ .invoice input[type="number"] {
+ width: 50px;
+ }
+ /* Green Signup Button */
+ .signup-button {
+ display: block;
+ width: 200px;
+ margin: 20px auto;
+ background-color: #4CAF50;
+ color: #fff;
+ border: none;
+ padding: 10px;
+ text-align: center;
+ text-decoration: none;
+ cursor: pointer;
+ }
+ </style>
+</head>
+<body>
+ <div class="invoice">
+ <h1>Invoice Generator</h1>
+ <label for="invoice-number">Invoice Number:</label>
+ <input type="text" id="invoice-number">
+ <label for="client-name">Client Name:</label>
+ <input type="text" id="client-name">
+ <label for="client-address">Client Address:</label>
+ <textarea id="client-address" rows="3"></textarea>
+ <table>
+ <thead>
+ <tr>
+ <th>Service</th>
+ <th>Description</th>
+ <th>Quantity</th>
+ <th>Unit Price</th>
+ <th>Total</th>
+ <th></th>
+ </tr>
+ </thead>
+ <tbody id="invoice-items">
+ <tr>
+ <td>
+ <select class="service-dropdown" onchange="calculateTotal()">
+ <option value="Logo Design">Logo Design</option>
+ <option value="Icon Design">Icon Design</option>
+ <option value="Webpage Design">Webpage Design</option>
+<option value="Website Redesign">Website Redesign</option>
+<option value="Infographic">Infographic</option>
+<option value="Brand Identity">Brand Identity</option>
+<option value="Brand Strategy">Brand Strategy</option>
+<option value="SEO Audit">SEO Audit</option>
+<option value="Social Media Strategy">Social Media Strategy</option>
+<option value="Website Design">Website Design</option>
+<option value="List of Journalists">List of Journalists</option>
+<option value="Link Building">Link Building</option>
+<option value="Long Form Article">Long Form Article</option>
+<option value="Case Study">Case Study</option>
+<option value="Key Messaging">Key Messaging</option>
+<option value="Paid Ads Setup">Paid Ads Setup</option>
+<option value="Website Copy">Website Copy</option>
+<option value="Social Media Captions">Social Media Captions</option>
+<option value="Email Marketing">Email Marketing</option>
+<option value="Brand Positioning">Brand Positioning</option>
+<option value="Press Release">Press Release</option>
+<option value="Short-Form Article">Short-Form Article</option>
+<option value="Event Photography">Event Photography</option>
+<option value="Portrait Photography Session">Portrait Photography Session</option>
+<option value="Wedding Photography">Wedding Photography</option>
+<option value="Competitor Analysis">Competitor Analysis</option>
+<option value="SWOT Analysis">SWOT Analysis</option>
+<option value="Website Hosting">Website Hosting</option>
+<option value="1:1 Coaching Session">1:1 Coaching Session</option>
+<option value="Instagram Post">Instagram Post</option>
+<option value="Instagram Reel">Instagram Reel</option>
+<option value="Income Tax Preparation & Filing">Income Tax Preparation & Filing</option>
+<option value="Coaching Plan">Coaching Plan</option>
+<option value="Wedding Videography ">Wedding Videography </option>
+<option value="Business Card Design">Business Card Design</option>
+<option value="Illustration">Illustration</option>
+<option value="Business Consulting Session">Business Consulting Session</option>
+<option value="Executive Coaching">Executive Coaching</option>
+<option value="Monthly Accounting">Monthly Accounting</option>
+<option value="Ads Management">Ads Management</option>
+<option value="Aerial Photography">Aerial Photography</option>
+<option value="Design Thinking Workshop">Design Thinking Workshop</option>
+<option value="Analytics Reporting">Analytics Reporting</option>
+<option value="App Hosting">App Hosting</option>
+<option value="Appointment Scheduling">Appointment Scheduling</option>
+<option value="Webflow Website ">Webflow Website </option>
+<option value="Balance Sheet Preparation">Balance Sheet Preparation</option>
+<option value="Home Staging">Home Staging</option>
+<option value="Billboard Design">Billboard Design</option>
+<option value="Blog Article">Blog Article</option>
+<option value="Blog Design">Blog Design</option>
+<option value="Brand Guidelines">Brand Guidelines</option>
+<option value="Brand Discovery Workshop">Brand Discovery Workshop</option>
+<option value="Branding Audit">Branding Audit</option>
+<option value="Bridal Makeup">Bridal Makeup</option>
+<option value="Logo Animation">Logo Animation</option>
+<option value="Domain Registration">Domain Registration</option>
+<option value="E-Commerce Website Design">E-Commerce Website Design</option>
+<option value="Email Template Design">Email Template Design</option>
+<option value="Event Coordinating">Event Coordinating</option>
+<option value="Event Vision & Branding">Event Vision & Branding</option>
+<option value="Facebook Ads - Set Up">Facebook Ads - Set Up</option>
+<option value="Monthly Facebook Ads">Monthly Facebook Ads</option>
+<option value="Facebook Page - Set Up">Facebook Page - Set Up</option>
+<option value="Flyer Design">Flyer Design</option>
+<option value="Fitness Coaching">Fitness Coaching</option>
+<option value="Focus Group Coordination">Focus Group Coordination</option>
+<option value="CMS Hosting">CMS Hosting</option>
+<option value="Google Ads Management">Google Ads Management</option>
+<option value="Google Analytics - Set Up">Google Analytics - Set Up</option>
+<option value="Google My Business - Set Up">Google My Business - Set Up</option>
+<option value="Testimonial Video ">Testimonial Video </option>
+<option value="Half-Day Shoot">Half-Day Shoot</option>
+<option value="Brand Photography">Brand Photography</option>
+<option value="Listing Photography">Listing Photography</option>
+<option value="Build Audience Personas">Build Audience Personas</option>
+<option value="Event Videography">Event Videography</option>
+<option value="Life Coaching Session">Life Coaching Session</option>
+<option value="Career Coaching Session">Career Coaching Session</option>
+<option value="Cleaning - 1 Bedroom">Cleaning - 1 Bedroom</option>
+<option value="Cleaning - Living Room">Cleaning - Living Room</option>
+<option value="Cleaning - Kitchen">Cleaning - Kitchen</option>
+<option value="Cleaning - Bathroom">Cleaning - Bathroom</option>
+<option value="Canva Template">Canva Template</option>
+<option value="Promotional Video">Promotional Video</option>
+<option value="3D Design">3D Design</option>
+<option value="Advertising Banner Design">Advertising Banner Design</option>
+<option value="Annual Accounting Cleanup">Annual Accounting Cleanup</option>
+<option value="Strategic Workshop">Strategic Workshop</option>
+<option value="Blog Post Email Promo">Blog Post Email Promo</option>
+<option value="Blog Post Social Campaign">Blog Post Social Campaign</option>
+<option value="Podcast Creation">Podcast Creation</option>
+<option value="Calendar Management">Calendar Management</option>
+<option value="Corporate Headshots">Corporate Headshots</option>
+<option value="Deck Design">Deck Design</option>
+<option value="First Consultation Call">First Consultation Call</option>
+<option value="Executive Coaching Session">Executive Coaching Session</option>
+<option value="Filming On Location">Filming On Location</option>
+<option value="Full Day Filming">Full Day Filming</option>
+<option value="GIF Design">GIF Design</option>
+<option value="Merchandise Design">Merchandise Design</option>
+<option value="Travel Research and Booking">Travel Research and Booking</option>
+<option value="Interior Painting">Interior Painting</option>
+<option value="Investing Advising">Investing Advising</option>
+<option value="Pitch Deck Template">Pitch Deck Template</option>
+<option value="Keyword Research">Keyword Research</option>
+<option value="Marketing Plan">Marketing Plan</option>
+<option value="Marketing Mentorship">Marketing Mentorship</option>
+<option value="Monthly Payroll Service">Monthly Payroll Service</option>
+<option value="TikTok Post">TikTok Post</option>
+<option value="Twitter Post">Twitter Post</option>
+<option value="Pest Control">Pest Control</option>
+<option value="Photo Editing">Photo Editing</option>
+<option value="Post Production Video Editing">Post Production Video Editing</option>
+<option value="Poster Design">Poster Design</option>
+<option value="PowerPoint Template">PowerPoint Template</option>
+<option value="Preliminary Consultation">Preliminary Consultation</option>
+<option value="Product Description">Product Description</option>
+<option value="Product Video">Product Video</option>
+<option value="Promotional Graphics">Promotional Graphics</option>
+<option value="Property Management">Property Management</option>
+<option value="Photography Retouching">Photography Retouching</option>
+<option value="Salesforce Set Up">Salesforce Set Up</option>
+<option value="Scriptwriting ">Scriptwriting </option>
+<option value="Speech Writing">Speech Writing</option>
+<option value="Squarespace Hosting">Squarespace Hosting</option>
+<option value="Webflow Hosting">Webflow Hosting</option>
+<option value="Wordpress Hosting">Wordpress Hosting</option>
+<option value="Stationery Design">Stationery Design</option>
+<option value="Sticker Design">Sticker Design</option>
+<option value="Storefront Set Up">Storefront Set Up</option>
+<option value="Strategy Session">Strategy Session</option>
+<option value="Styling">Styling</option>
+<option value="Technical Consulting">Technical Consulting</option>
+<option value="Translation">Translation</option>
+<option value="Shopify Web Hosting">Shopify Web Hosting</option>
+<option value="Webinar Creation">Webinar Creation</option>
+<option value="Webinar Hosting">Webinar Hosting</option>
+<option value="Zapier Automation">Zapier Automation</option>
+<option value="Influencer Marketing">Influencer Marketing</option>
+<option value="Architecture Design">Architecture Design</option>
+<option value="3D Modeling Architecture">3D Modeling Architecture</option>
+<option value="Architectural Drawing">Architectural Drawing</option>
+<option value="Architectural Drafting">Architectural Drafting</option>
+<option value="Architectural Rendering">Architectural Rendering</option>
+<option value="Building Design">Building Design</option>
+<option value="Construction Documentation">Construction Documentation</option>
+<option value="Interior Design">Interior Design</option>
+<option value="Landscape Design">Landscape Design</option>
+<option value="Space Planning">Space Planning</option>
+<option value="Urban Design">Urban Design</option>
+<option value="Architectural Animation">Architectural Animation</option>
+<option value="Building Evaluation">Building Evaluation</option>
+<option value="Building Modeling">Building Modeling</option>
+<option value="CAD Drafting">CAD Drafting</option>
+<option value="CAD Services">CAD Services</option>
+<option value="Concept Design">Concept Design</option>
+<option value="Design Development">Design Development</option>
+<option value="Design Verification">Design Verification</option>
+<option value="Environmental Analysis">Environmental Analysis</option>
+<option value="Feasibility Studies">Feasibility Studies</option>
+<option value="Floor Plan Design">Floor Plan Design</option>
+<option value="Green Building Design">Green Building Design</option>
+<option value="Historic Preservation">Historic Preservation</option>
+<option value="Lighting Design">Lighting Design</option>
+<option value="Master Planning">Master Planning</option>
+<option value="Project Management">Project Management</option>
+<option value="Renovation Design">Renovation Design</option>
+<option value="Restoration Design">Restoration Design</option>
+<option value="Site Analysis">Site Analysis</option>
+<option value="Site Development">Site Development</option>
+<option value="Sketching">Sketching</option>
+<option value="Sustainable Design">Sustainable Design</option>
+<option value="3D Visualization">3D Visualization</option>
+<option value="Building Analysis">Building Analysis</option>
+<option value="Building Information Modeling">Building Information Modeling</option>
+<option value="Building Renovation Services">Building Renovation Services</option>
+<option value="Code Compliance">Code Compliance</option>
+<option value="Computer-Aided Design">Computer-Aided Design</option>
+<option value="Cost Estimation">Cost Estimation</option>
+<option value="Design Build Services">Design Build Services</option>
+<option value="Design Documentation">Design Documentation</option>
+<option value="Design Strategy">Design Strategy</option>
+<option value="Design Visualization">Design Visualization</option>
+<option value="Exterior Design">Exterior Design</option>
+<option value="HVAC Design">HVAC Design</option>
+<option value="Land Use Planning">Land Use Planning</option>
+<option value="Material Selection">Material Selection</option>
+<option value="Permit Services Programming">Permit Services Programming</option>
+<option value="Project Cost Analysis">Project Cost Analysis</option>
+<option value="Project Scheduling">Project Scheduling</option>
+<option value="Property Assessment">Property Assessment</option>
+<option value="Space Design">Space Design</option>
+<option value="Structural Design">Structural Design</option>
+<option value="Sustainable Building Analysis">Sustainable Building Analysis</option>
+<option value="Systems Integration">Systems Integration</option>
+<option value="Visualization Modeling">Visualization Modeling</option>
+<option value="Zoning Analysis">Zoning Analysis</option>
+<option value="Building Facade Design">Building Facade Design</option>
+<option value="Building Model Fabrication">Building Model Fabrication</option>
+<option value="Building Simulation">Building Simulation</option>
+<option value="Construction Coordination">Construction Coordination</option>
+<option value="Decorative Design">Decorative Design</option>
+<option value="Facility Programming">Facility Programming</option>
+<option value="Facility Renovation">Facility Renovation</option>
+<option value="Furniture Design">Furniture Design</option>
+<option value="Local Building Codes">Local Building Codes</option>
+<option value="Mechanical Design">Mechanical Design</option>
+<option value="Modular Building Design">Modular Building Design</option>
+<option value="Municipal Planning Project">Municipal Planning Project</option>
+<option value="Legal Document Drafting">Legal Document Drafting</option>
+<option value="Legal Research">Legal Research</option>
+<option value="Legal Advice">Legal Advice</option>
+<option value="Legal Document Review">Legal Document Review</option>
+<option value="Legal Document Preparation">Legal Document Preparation</option>
+<option value="Contract Drafting">Contract Drafting</option>
+<option value="Contract Negotiation">Contract Negotiation</option>
+<option value="Contract Review">Contract Review</option>
+<option value="Litigation Support">Litigation Support</option>
+<option value="Legal Memorandum Creation">Legal Memorandum Creation</option>
+<option value="Corporate Formation">Corporate Formation</option>
+<option value="Business Incorporation">Business Incorporation</option>
+<option value="Business Licensing">Business Licensing</option>
+<option value="Business Taxation">Business Taxation</option>
+<option value="Intellectual Property Protection">Intellectual Property Protection</option>
+<option value="Will & Estate Planning">Will & Estate Planning</option>
+<option value="Family Law Services">Family Law Services</option>
+<option value="Civil Litigation">Civil Litigation</option>
+<option value="Employment Law Services">Employment Law Services</option>
+<option value="Real Estate Transactions">Real Estate Transactions</option>
+<option value="Personal Injury Representation">Personal Injury Representation</option>
+<option value="Litigation Strategies">Litigation Strategies</option>
+<option value="Arbitration & Mediation">Arbitration & Mediation</option>
+<option value="Debt Collection Representation">Debt Collection Representation</option>
+<option value="Landlord-Tenant Representation">Landlord-Tenant Representation</option>
+<option value="Insurance Dispute Representation">Insurance Dispute Representation</option>
+<option value="Appellate Representation">Appellate Representation</option>
+<option value="Federal & State Tax Representation">Federal & State Tax Representation</option>
+<option value="Consumer Protection Representation">Consumer Protection Representation</option>
+<option value="Pre-Litigation Strategies">Pre-Litigation Strategies</option>
+<option value="Alternative Dispute Resolution">Alternative Dispute Resolution</option>
+<option value="Insurance Coverage Disputes">Insurance Coverage Disputes</option>
+<option value="Employment Discrimination">Employment Discrimination</option>
+<option value="Employment Agreements">Employment Agreements</option>
+<option value="Securities & Investment Fraud">Securities & Investment Fraud</option>
+<option value="Bookkeeping">Bookkeeping</option>
+<option value="Tax Preparation">Tax Preparation</option>
+<option value="Auditing">Auditing</option>
+<option value="Financial Planning">Financial Planning</option>
+<option value="Account Reconciliation">Account Reconciliation</option>
+<option value="Asset Valuation">Asset Valuation</option>
+<option value="Payroll Services">Payroll Services</option>
+<option value="Estate Planning">Estate Planning</option>
+<option value="Business Valuation">Business Valuation</option>
+<option value="Financial Analysis">Financial Analysis</option>
+<option value="Accounting System Setup">Accounting System Setup</option>
+<option value="Financial Statement Preparation">Financial Statement Preparation</option>
+<option value="Cash Flow Management">Cash Flow Management</option>
+<option value="Budget Development">Budget Development</option>
+<option value="Cost Analysis">Cost Analysis</option>
+<option value="Income Tax Returns">Income Tax Returns</option>
+<option value="Financial Modeling">Financial Modeling</option>
+<option value="Accounts Payable/Receivable">Accounts Payable/Receivable</option>
+<option value="Forensic Accounting">Forensic Accounting</option>
+<option value="Risk Management">Risk Management</option>
+<option value="Corporate Tax Returns">Corporate Tax Returns</option>
+<option value="Budget Forecasting">Budget Forecasting</option>
+<option value="IRS Representation">IRS Representation</option>
+<option value="Business Plan Development">Business Plan Development</option>
+<option value="Accounts Receivable/Payable Management">Accounts Receivable/Payable Management</option>
+<option value="Tax Compliance">Tax Compliance</option>
+<option value="Subsidiary Accounting">Subsidiary Accounting</option>
+<option value="Business Valuations">Business Valuations</option>
+<option value="Data Analysis">Data Analysis</option>
+<option value="Investment Analysis">Investment Analysis</option>
+<option value="Retirement Planning">Retirement Planning</option>
+<option value="Management Consulting">Management Consulting</option>
+<option value="Accounting Software Implementation">Accounting Software Implementation</option>
+<option value="Trust Tax Returns">Trust Tax Returns</option>
+<option value="Business Entity Selection">Business Entity Selection</option>
+<option value="GST/VAT Returns">GST/VAT Returns</option>
+<option value="Estate Tax Returns">Estate Tax Returns</option>
+<option value="Leadership Coaching">Leadership Coaching</option>
+<option value="Personal Development Coaching">Personal Development Coaching</option>
+<option value="Goal Setting Coaching">Goal Setting Coaching</option>
+<option value="Communication Skills Coaching">Communication Skills Coaching</option>
+<option value="Decision Making Coaching">Decision Making Coaching</option>
+<option value="Creativity Coaching">Creativity Coaching</option>
+<option value="Job Interview Coaching">Job Interview Coaching</option>
+<option value="Team Coaching">Team Coaching</option>
+<option value="Goal Achievement Coaching">Goal Achievement Coaching</option>
+ <!-- Add other service options here -->
+ </select>
+ </td>
+ <td><input type="text"></td>
+ <td><input type="number" oninput="calculateTotal()"></td>
+ <td><input type="number" oninput="calculateTotal()"></td>
+ <td></td>
+ <td><button class="remove-item-btn" onclick="removeItem(this)">Remove</button></td>
+ </tr>
+ </tbody>
+ <tfoot>
+ <tr>
+ <td colspan="3">Subtotal:</td>
+ <td id="subtotal">0</td>
+ <td></td>
+ </tr>
+ <tr>
+ <td colspan="3">Tax (15%):</td>
+ <td id="tax">0</td>
+ <td></td>
+ </tr>
+ <tr>
+ <td colspan="3">Total:</td>
+ <td id="total">0</td>
+ <td></td>
+ </tr>
+ <tr>
+ <td colspan="4">Due Date:</td>
+ <td><input type="date" id="due-date"></td>
+ </tr>
+ <tr>
+ <td colspan="4">Payment Terms:</td>
+ <td><input type="text" id="payment-terms" value="Payment is due in 14 days" style="color: #999;"></td>
+ </tr>
+ </tfoot>
+ </table>
+ <label for="currency">Currency:</label>
+ <select id="currency" onchange="calculateTotal()">
+ <option value="USD">&#x1F1FA;&#x1F1F8; USD (United States Dollar)</option>
+ <option value="EUR">&#x1F1EA;&#x1F1FA; EUR (Euro)</option>
+ <option value="JPY">&#x1F1EF;&#x1F1F5; JPY (Japanese Yen)</option>
+ <option value="GBP">&#x1F1EC;&#x1F1E7; GBP (British Pound Sterling)</option>
+ <option value="AUD">&#x1F1E6;&#x1F1FA; AUD (Australian Dollar)</option>
+ <!-- Add the remaining top 25 currencies here -->
+ </select>
+ <button class="add-item-btn" onclick="addItem()">Add Item</button>
+ <a href="https://app.hellobonsai.com/users/sign_up?int_source=invoicegenerator" class="signup-button">Download Invoice</a>
+ </div>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.10.2/jspdf.umd.min.js"></script>
+ <script>
+ var serviceOptions = [
+ "Logo Design",
+ "Icon Design",
+ "Brand Design",
+ "Consulting",
+ "Webpage Design",
+ "Website Redesign",
+ "Coaching Session"
+ ];
+
+ function calculateTotal() {
+ var subtotal = 0;
+ var tax = 0.15;
+ var rows = document.querySelectorAll("#invoice-items tr");
+
+ for (var i = 0; i < rows.length; i++) {
+ var row = rows[i];
+ var quantity = parseFloat(row.cells[2].querySelector("input").value);
+ var price = parseFloat(row.cells[3].querySelector("input").value);
+ var total = row.cells[4];
+
+ if (!isNaN(quantity) && !isNaN(price)) {
+ var itemTotal = quantity * price;
+ total.textContent = itemTotal.toFixed(2);
+ subtotal += itemTotal;
+ }
+ }
+
+ var taxAmount = subtotal * tax;
+ var totalAmount = subtotal + taxAmount;
+
+ document.getElementById("subtotal").textContent = subtotal.toFixed(2);
+ document.getElementById("tax").textContent = taxAmount.toFixed(2);
+ document.getElementById("total").textContent = totalAmount.toFixed(2);
+ }
+
+ function addItem() {
+ var table = document.getElementById("invoice-items");
+ var row = table.insertRow();
+ var serviceCell = row.insertCell();
+ var descriptionCell = row.insertCell();
+ var quantityCell = row.insertCell();
+ var priceCell = row.insertCell();
+ var totalCell = row.insertCell();
+ var actionCell = row.insertCell();
+
+ serviceCell.innerHTML = getServiceDropdownHtml();
+ descriptionCell.innerHTML = '<input type="text">';
+ quantityCell.innerHTML = '<input type="number" oninput="calculateTotal()">';
+ priceCell.innerHTML = '<input type="number" oninput="calculateTotal()">';
+ totalCell.textContent = "";
+ actionCell.innerHTML = '<button class="remove-item-btn" onclick="removeItem(this)">Remove</button>';
+
+ // Re-calculate total after adding the new row
+ calculateTotal();
+ }
+
+ function removeItem(button) {
+ var row = button.parentNode.parentNode;
+ row.parentNode.removeChild(row);
+ calculateTotal();
+ }
+
+ function getServiceDropdownHtml(selectedService) {
+ var dropdownHtml = '<select class="service-dropdown" onchange="calculateTotal()">';
+ serviceOptions.forEach(function (option) {
+ dropdownHtml += '<option value="' + option + '"';
+ if (option === selectedService) {
+ dropdownHtml += ' selected';
+ }
+ dropdownHtml += '>' + option + '</option>';
+ });
+ dropdownHtml += '</select>';
+ return dropdownHtml;
+ }
+ function generateInvoicePDF(copy = false) {
+ var doc = new jsPDF();
+ var invoiceNumber = document.getElementById("invoice-number").value;
+ var clientName = document.getElementById("client-name").value;
+ var clientAddress = document.getElementById("client-address").value;
+ var currency = document.getElementById("currency").value;
+ var dueDate = document.getElementById("due-date").value;
+ var paymentTerms = document.getElementById("payment-terms").value;
+
+ var table = document.getElementById("invoice-items");
+ var rows = table.rows;
+
+ var data = [];
+ for (var i = 1; i < rows.length; i++) {
+ var row = rows[i];
+ var service = row.cells[0].querySelector("select").value;
+ var description = row.cells[1].querySelector("input").value;
+ var quantity = row.cells[2].querySelector("input").value;
+ var price = row.cells[3].querySelector("input").value;
+ var total = row.cells[4].textContent;
+ data.push([service, description, quantity, price, total]);
+ }
+
+ var subtotal = document.getElementById("subtotal").textContent;
+ var tax = document.getElementById("tax").textContent;
+ var totalAmount = document.getElementById("total").textContent;
+
+ var content = "Invoice Number: " + invoiceNumber + "\n";
+ content += "Client Name: " + clientName + "\n";
+ content += "Client Address: " + clientAddress + "\n";
+ content += "Currency: " + currency + "\n";
+ content += "Due Date: " + dueDate + "\n";
+ content += "Payment Terms: " + paymentTerms + "\n\n";
+
+ content += "Service | Description | Quantity | Unit Price | Total\n";
+ content += "----------------------------------------------------\n";
+ for (var i = 0; i < data.length; i++) {
+ content += data[i].join(" | ") + "\n";
+ }
+ content += "----------------------------------------------------\n";
+ content += "Subtotal: " + subtotal + "\n";
+ content += "Tax (15%): " + tax + "\n";
+ content += "Total: " + totalAmount;
+
+ if (copy) {
+ doc.setFont("helvetica", "normal");
+ doc.text(20, 20, "Invoice Copy");
+ }
+
+ doc.setFont("courier");
+ doc.setFontSize(10);
+ doc.text(content, 20, copy ? 30 : 20);
+
+ if (copy) {
+ doc.save("invoice_copy_sample.pdf");
+ } else {
+ doc.save("invoice_sample.pdf");
+ }
+ }
+ </script>
+</body>
+</html>
